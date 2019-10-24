@@ -5,7 +5,7 @@
 #[cfg(test)] mod tests;
 
 #[get("/hello/<name>")]
-fn hello(name: &RawStr) -> String {
+fn hello(name: &String) -> String {
     format!("Hello, {}!", name.as_str())
 }
 
