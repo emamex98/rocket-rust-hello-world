@@ -4,9 +4,9 @@
 
 #[cfg(test)] mod tests;
 
-#[get("/")]
-fn hello() -> &'static str {
-    "Hello, world!"
+#[get("/<name>")]
+fn hello(name: &RawStr) -> String {
+    format!("Hello, {}!", name.as_str())
 }
 
 fn main() {
