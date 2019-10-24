@@ -1,14 +1,19 @@
-#![feature(proc_macro_hygiene, decl_macro)]
+#![feature(proc_macro_hygiene)]
 
 #[macro_use] extern crate rocket;
 
 #[cfg(test)] mod tests;
 
+#[get("/hello/<name>/<age>")]
+fn hello(name: String, age: u8) -> String {
+    format!("Hello, {} year old named {}!", age, name)
+}
+
 #[get("/hello/<name>")]
-fn hello(name: &String) -> String {
-    format!("Hello, {}!", name.as_str())
+fn hi(name: String) -> String {
+    name
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![hello]).launch();
+    rocket::ignite().mount("/", routes![hello, hi]).launch();
 }
